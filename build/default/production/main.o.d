@@ -12,7 +12,8 @@ build/default/production/main.o.d build/default/production/main.o: main.c \
  /usr/avr/include/avr/pgmspace.h /usr/avr/include/bits/lpm-elpm.h \
  /usr/avr/include/bits/def-pgm-read.h \
  /usr/avr/include/bits/def-pgm-read-far.h /usr/avr/include/avr/eeprom.h \
- /usr/avr/include/util/delay.h /usr/avr/include/util/delay_basic.h
+ /usr/avr/include/util/delay.h /usr/avr/include/util/delay_basic.h \
+ pinGetLevel/pinGetLevel.h pinGetLevel/../main.h
 /usr/avr/include/stdio.h:
 /usr/avr/include/inttypes.h:
 /usr/lib/gcc/avr/15.1.0/include/stdint.h:
@@ -41,3 +42,5 @@ system.h:
 /usr/avr/include/avr/eeprom.h:
 /usr/avr/include/util/delay.h:
 /usr/avr/include/util/delay_basic.h:
+pinGetLevel/pinGetLevel.h:
+pinGetLevel/../main.h:

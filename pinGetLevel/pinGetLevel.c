@@ -31,6 +31,14 @@ static uint8_t pinGetLevel_2(void)
 {
 	return ReadPin(PORTRxGETLEVEL_2, PINxGETLEVEL_2);
 }
+static uint8_t pinGetLevel_3(void)
+{
+	return ReadPin(PORTRxGETLEVEL_3, PINxGETLEVEL_3);
+}
+static uint8_t pinGetLevel_4(void)
+{
+	return ReadPin(PORTRxGETLEVEL_4, PINxGETLEVEL_4);
+}
 
 
 void pinGetLevel_init(void)
@@ -38,6 +46,8 @@ void pinGetLevel_init(void)
 	PinTo1(PORTWxGETLEVEL_0, PINxGETLEVEL_0);//Pull-up
 	PinTo1(PORTWxGETLEVEL_1, PINxGETLEVEL_1);//Pull-up
         PinTo1(PORTWxGETLEVEL_2, PINxGETLEVEL_2);//Pull-up
+        PinTo1(PORTWxGETLEVEL_1, PINxGETLEVEL_3);//Pull-up
+        PinTo1(PORTWxGETLEVEL_2, PINxGETLEVEL_4);//Pull-up
         
         __delay_ms(1);
         
@@ -52,6 +62,14 @@ void pinGetLevel_init(void)
 	ConfigInputPin(CONFIGIOxGETLEVEL_2, PINxGETLEVEL_2);
 	pinGetLevel[2].readPinLevel = pinGetLevel_2;
 
+        
+        ConfigInputPin(CONFIGIOxGETLEVEL_3, PINxGETLEVEL_3);
+	pinGetLevel[3].readPinLevel = pinGetLevel_3;
+
+        
+	ConfigInputPin(CONFIGIOxGETLEVEL_4, PINxGETLEVEL_4);
+	pinGetLevel[4].readPinLevel = pinGetLevel_4;
+        
 	__delay_ms(1);
 	//Set initial level
 	for (int i=0; i<PINGETLEVEL_NUMMAX; i++)
