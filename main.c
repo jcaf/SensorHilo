@@ -14,6 +14,65 @@
 #include <stdlib.h>
 #include "main.h"
 
+volatile struct _isrflag isrflag;
+struct _mainflag mainflag;
+
+enum _ESTADO_HILO
+{
+    BUSCANDO = 0,
+    HILO_OK = 1,
+    HILO_ROTO = 2
+};
+
+
+struct busc_estado_hilo_t
+{
+    int8_t sm0;
+    uint16_t counter_ticks;
+   
+}busc_estado_hilo;
+
+struct _canal
+{
+    //estado de sensor de hilo
+    int8_t estado_hilo;
+    uint8_t count_changelevel;
+    PTRFX_retVOID pinchangelevel_enable;
+    PTRFX_retVOID pinchangelevel_disable;
+    
+    //control relay de 24VAC
+    struct _v24ac
+    {
+        PTRFX_retVOID on;
+        PTRFX_retVOID off;
+        uint16_t count_time_encendido;
+        
+        struct _v24ac_bf
+        {
+           unsigned timming:1;
+           unsigned __a:7;
+        }bf;
+    }v24ac;
+    
+    //shortckt
+    PTRFX_retUINT8_T fx_shortckt_read;
+    
+    union _test_sensorhilo_u_error
+    {
+        struct _test_sensorhilo_bf
+        {
+            unsigned shortckt:1;
+            unsigned v24ac:1;
+            unsigned __a:6;
+        }bf;
+        
+        uint8_t error;
+    }u_error;
+
+};
+
+volatile struct _canal canal[NUM_CANALES_SENSOR];
+
 ////////////////////////////////////////////////////////////////////////////////
 uint8_t canal1_shortckt_read(void)
 {
@@ -101,64 +160,6 @@ void canal3_pinchangelevel_enable(void)
     BitTo1(PCMSK2, PCINT20);
 } 
 
-volatile struct _isrflag isrflag;
-struct _mainflag mainflag;
-
-enum _ESTADO_HILO
-{
-    BUSCANDO = 0,
-    HILO_OK = 1,
-    HILO_ROTO = 2
-};
-
-
-struct busc_estado_hilo_t
-{
-    int8_t sm0;
-    uint16_t counter_ticks;
-   
-}busc_estado_hilo;
-
-struct _canal
-{
-    //estado de sensor de hilo
-    int8_t estado_hilo;
-    uint8_t count_changelevel;
-    PTRFX_retVOID pinchangelevel_enable;
-    PTRFX_retVOID pinchangelevel_disable;
-    
-    //control relay de 24VAC
-    struct _v24ac
-    {
-        PTRFX_retVOID on;
-        PTRFX_retVOID off;
-        uint16_t count_time_encendido;
-        
-        struct _v24ac_bf
-        {
-           unsigned timming:1;
-           unsigned __a:7;
-        }bf;
-    }v24ac;
-    
-    //shortckt
-    PTRFX_retUINT8_T fx_shortckt_read;
-    
-    union _test_sensorhilo_u_error
-    {
-        struct _test_sensorhilo_bf
-        {
-            unsigned shortckt:1;
-            unsigned v24ac:1;
-            unsigned __a:6;
-        }bf;
-        
-        uint8_t error;
-    }u_error;
-
-};
-
-volatile struct _canal canal[NUM_CANALES_SENSOR];
 
 
 
