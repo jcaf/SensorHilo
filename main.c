@@ -161,8 +161,6 @@ void canal3_pinchangelevel_enable(void)
 } 
 
 
-
-
 int main(void)
 {
     ConfigOutputPin(CONFIGIOxTEST1_CONTROL24VAC, PINxTEST1_CONTROL24VAC);
@@ -238,10 +236,7 @@ int main(void)
     TIMSK0 |= (1 << OCIE0A);
     sei();
     //
-    for (int8_t i=0; i<NUM_CANALES_SENSOR; i++)
-    {
-        canal[i].pinchangelevel_enable();
-    }
+    
     
     canal[0].pinchangelevel_enable = canal1_pinchangelevel_enable;
     canal[1].pinchangelevel_enable = canal2_pinchangelevel_enable;
@@ -264,6 +259,13 @@ int main(void)
     canal[1].fx_shortckt_read = canal2_shortckt_read;
     canal[2].fx_shortckt_read = canal3_shortckt_read;
     
+    for (int8_t i=0; i<NUM_CANALES_SENSOR; i++)
+    {
+        canal[i].pinchangelevel_enable();
+    }
+    
+    BitTo1(PCICR, PCIE2);
+    
     while (1)
     {
         if (isrflag.sysTickMs)
@@ -272,10 +274,6 @@ int main(void)
             mainflag.sysTickMs = 1;
         }
         //----------------------
-        if (mainflag.sysTickMs)
-        {
-
-        }
             
         //test pulsadores externos
         if (PinRead(PORTRxSW_ANULAR, PINxSW_ANULAR) == SW_ANULAR_ON_LEVEL)
@@ -294,8 +292,6 @@ int main(void)
             PinTo1(PORTWxRELAY_START_STOP, PINxRELAY_START_STOP);
         }
         //(PORTWxRELAY_TIMER, PINxRELAY_TIMER);
-
-
         //PinTo1(PORTWxBUZZER, PINxBUZZER); //al ocurrir un error
         ////////////////////////////////////////////////////////////////
         
@@ -306,7 +302,7 @@ int main(void)
             {
                 canal[i].u_error.bf.shortckt = 1;//error = 1;
 
-                canal[i].v24ac.off;
+                canal[i].v24ac.off();
                 
                 //desactiva relay
                 PinTo0(PORTWxRELAY_START_STOP, PINxRELAY_START_STOP);
@@ -317,7 +313,8 @@ int main(void)
         }
         
         // si no existe ningun de los 24VDC, entonces tambien es un error
-        //Error en general
+        //Error en general, 
+//EN ESTE PUNTO DE PARAR EL CANAL CORRESPONDIENTE??        
         
         for (int8_t i=0; i<NUM_CANALES_SENSOR ; i++)
         {
@@ -353,18 +350,21 @@ int main(void)
             //if temporizado==ON && (temporizador de 24VC > limite)
             if (canal[i].v24ac.bf.timming)
             {
-                if (canal[i].v24ac.count_time_encendido > (uint16_t)(NUMPERIODOS*T_60HZ) )         
+                if (mainflag.sysTickMs)
                 {
-                    //ahora volver a busqueda_hilo = on;
-                    //busqueda_hilo = on;      
-                    canal[i].pinchangelevel_enable();
-                    canal[i].v24ac.off();
+                    if (canal[i].v24ac.count_time_encendido > (uint16_t)(NUMPERIODOS*T_60HZ) )         
+                    {
+                        //ahora volver a busqueda_hilo = on;
+                        //busqueda_hilo = on;      
+                        canal[i].pinchangelevel_enable();
+                        canal[i].v24ac.off();
 
-                    canal[i].v24ac.bf.timming = 0;
+                        canal[i].v24ac.bf.timming = 0;
+                    }
                 }
+
             }
         }
-    
              
         //endfor
      
