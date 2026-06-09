@@ -30,7 +30,7 @@ struct busc_estado_hilo_t
     int8_t sm0;
     uint16_t counter_ticks;
    
-}busc_estado_hilo;
+}busc_estado_hilo[NUM_CANALES_SENSOR];
 
 struct _canal
 {
@@ -39,6 +39,7 @@ struct _canal
     uint8_t count_changelevel;
     PTRFX_retVOID pinchangelevel_enable;
     PTRFX_retVOID pinchangelevel_disable;
+    PTRFX_retUINT8_T pinchangelevel_is_enable;
     
     //control relay de 24VAC
     struct _v24ac
@@ -159,7 +160,21 @@ void canal3_pinchangelevel_enable(void)
 {
     BitTo1(PCMSK2, PCINT20);
 } 
+ 
+uint8_t canal1_pinchangelevel_is_enable(void)
+{
+    return (PCMSK2 & (1<<PCINT18) );
+}
+uint8_t canal2_pinchangelevel_is_enable(void)
+{
+    return (PCMSK2 & (1<<PCINT19) );
+}
+uint8_t canal3_pinchangelevel_is_enable(void)
+{
+    return (PCMSK2 & (1<<PCINT20) );
+}
 
+void buscando_estado_hilo(void);
 
 int main(void)
 {
@@ -234,10 +249,10 @@ int main(void)
     OCR0A = CTC_SET_OCR_BYTIME(1e-3, 64);//1ms Exacto @PRES=64
     //
     TIMSK0 |= (1 << OCIE0A);
-    sei();
+    
     //
     
-    
+    //
     canal[0].pinchangelevel_enable = canal1_pinchangelevel_enable;
     canal[1].pinchangelevel_enable = canal2_pinchangelevel_enable;
     canal[2].pinchangelevel_enable = canal3_pinchangelevel_enable;
@@ -246,6 +261,10 @@ int main(void)
     canal[1].pinchangelevel_disable = canal2_pinchangelevel_disable;
     canal[2].pinchangelevel_disable = canal3_pinchangelevel_disable;
     
+    canal[0].pinchangelevel_is_enable = canal1_pinchangelevel_is_enable;
+    canal[1].pinchangelevel_is_enable = canal2_pinchangelevel_is_enable;
+    canal[2].pinchangelevel_is_enable = canal3_pinchangelevel_is_enable;
+    //
     canal[0].v24ac.on = canal1_relay24VAC_ON;
     canal[1].v24ac.on = canal2_relay24VAC_ON;
     canal[2].v24ac.on = canal3_relay24VAC_ON;
@@ -253,8 +272,7 @@ int main(void)
     canal[0].v24ac.off = canal1_relay24VAC_OFF;
     canal[1].v24ac.off = canal2_relay24VAC_OFF;
     canal[2].v24ac.off = canal3_relay24VAC_OFF;
-    
-    
+    //
     canal[0].fx_shortckt_read = canal1_shortckt_read;
     canal[1].fx_shortckt_read = canal2_shortckt_read;
     canal[2].fx_shortckt_read = canal3_shortckt_read;
@@ -265,6 +283,7 @@ int main(void)
     }
     
     BitTo1(PCICR, PCIE2);
+    sei();
     
     while (1)
     {
@@ -274,7 +293,9 @@ int main(void)
             mainflag.sysTickMs = 1;
         }
         //----------------------
-            
+        buscando_estado_hilo();
+        //----------------------
+        
         //test pulsadores externos
         if (PinRead(PORTRxSW_ANULAR, PINxSW_ANULAR) == SW_ANULAR_ON_LEVEL)
         {
@@ -295,7 +316,7 @@ int main(void)
         //PinTo1(PORTWxBUZZER, PINxBUZZER); //al ocurrir un error
         ////////////////////////////////////////////////////////////////
         
-        //Error por cada canal
+        //Error por cortocircuito
         for (int i=0; i<NUM_CANALES_SENSOR; i++)
         {
             if (canal[i].fx_shortckt_read() == SHORTCIRCUIT_LEVEL )
@@ -314,7 +335,7 @@ int main(void)
         
         // si no existe ningun de los 24VDC, entonces tambien es un error
         //Error en general, 
-//EN ESTE PUNTO DE PARAR EL CANAL CORRESPONDIENTE??        
+        //EN ESTE PUNTO DE PARAR EL CANAL CORRESPONDIENTE??        
         
         for (int8_t i=0; i<NUM_CANALES_SENSOR ; i++)
         {
@@ -324,17 +345,18 @@ int main(void)
                 if (canal[i].estado_hilo == HILO_ROTO )
                 {
                     canal[i].v24ac.on();
+                    
                     //en este momento no tiene valor buscar el estado del hilo
                     //xq el hardware esta unido con el diodo, entonces
                     //siempre ve que oscila la senal, por eso, desabilito la fx_buscando_estado_hilo()
                     
-                    //busqueda_hilo = off;      
-                    canal[i].pinchangelevel_disable();
                     
-
+                    canal[i].pinchangelevel_disable();//busqueda_hilo = off;      
+                    
                     //lanzar el temporizador      
-                    canal[i].v24ac.count_time_encendido = 0;
                     canal[i].v24ac.bf.timming = 1;
+                    canal[i].v24ac.count_time_encendido = 0;
+                    
                 }
                 else if (canal[i].estado_hilo == HILO_OK )
                 {
@@ -347,26 +369,20 @@ int main(void)
         //
         for (int8_t i=0; i<NUM_CANALES_SENSOR ; i++)
         {
-            //if temporizado==ON && (temporizador de 24VC > limite)
             if (canal[i].v24ac.bf.timming)
             {
                 if (mainflag.sysTickMs)
                 {
-                    if (canal[i].v24ac.count_time_encendido > (uint16_t)(NUMPERIODOS*T_60HZ) )         
+                    if (++canal[i].v24ac.count_time_encendido >= (uint16_t)(NUMPERIODOS*T_60HZ) )         
                     {
-                        //ahora volver a busqueda_hilo = on;
-                        //busqueda_hilo = on;      
-                        canal[i].pinchangelevel_enable();
                         canal[i].v24ac.off();
-
                         canal[i].v24ac.bf.timming = 0;
+                        
+                        canal[i].pinchangelevel_enable();   //ahora volver a busqueda_hilo = on;
                     }
                 }
-
             }
-        }
-             
-        //endfor
+        }//endfor
      
         mainflag.sysTickMs = 0;
     
@@ -395,11 +411,11 @@ in SREG and the PCIE2 bit in PCICR are set, the MCU will jump to the correspondi
 The flag is cleared when the interrupt routine is executed. Alternatively, the flag can be cleared by writing
 '1' to it.
  */
- 
-volatile uint8_t PD_last;
 
 ISR(PCINT2_vect)
 {
+    volatile static uint8_t PD_last;
+    
     uint8_t PUERTOD = PIND;
     
     if (PCMSK2 & (1<<PCINT18) ) //esta habilitado ese pin?
@@ -432,45 +448,90 @@ ISR(PCINT2_vect)
 //acaba el tiempo:
 //solo tiene 2 opciones, hiloabierto, hilook
 ////////////////////////////////////////////////////////////////////////////////    
+//void buscando_estado_hilo(void)
+//{
+//    if (busc_estado_hilo.sm0 == 0) 
+//    {
+//        
+//        busc_estado_hilo.counter_ticks = 0;
+//        busc_estado_hilo.sm0++;
+//        
+//        for (int8_t i=0; i<NUM_CANALES_SENSOR; i++ )
+//        {
+//            canal[i].count_changelevel = 0x00;
+//        }
+//        BitTo1(PCICR, PCIE2);//Activar interrupciones por cambio de nivel
+//    }
+//    else
+//    {
+//        if (mainflag.sysTickMs)
+//        {
+//            if ( ++busc_estado_hilo.counter_ticks >= (NUMPERIODOS*T_60HZ) )
+//            {
+//                BitTo0(PCICR, PCIE2);
+//                
+//                for (int8_t i=0; i<NUM_CANALES_SENSOR; i++)
+//                {
+//                     if (canal[i].count_changelevel >= (uint16_t)(PORCENTAJE_UMBRAL_NUMCAMBIOS*(2*NUMPERIODOS)) )
+//                     {
+//                        canal[i].estado_hilo = HILO_ROTO;
+//                     }
+//                     else
+//                     {
+//                        canal[i].estado_hilo = HILO_OK;
+//                     }
+//                }
+//                //
+//                busc_estado_hilo.sm0 = 0;
+//                //
+//            }
+//        }
+//    }
+//}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++
+//tiene que ser independiente cada canal controlar su tiempo 
 void buscando_estado_hilo(void)
 {
-    if (busc_estado_hilo.sm0 == 0) 
+    for (int8_t i=0; i<NUM_CANALES_SENSOR; i++ )
     {
-        
-        busc_estado_hilo.counter_ticks = 0;
-        busc_estado_hilo.sm0++;
-        
-        for (int8_t i=0; i<NUM_CANALES_SENSOR; i++ )
+        if (canal[i].pinchangelevel_is_enable())
         {
-            canal[i].count_changelevel = 0;
-        }
-        BitTo1(PCICR, PCIE2);//Activar interrupciones por cambio de nivel
-    }
-    else
-    {
-        if (mainflag.sysTickMs)
-        {
-            if ( ++busc_estado_hilo.counter_ticks >= (NUMPERIODOS*T_60HZ) )
+            if (busc_estado_hilo[i].sm0 == 0) 
             {
-                BitTo0(PCICR, PCIE2);
-                
-                for (int8_t i=0; i<NUM_CANALES_SENSOR; i++)
-                {
-                     //if ()
-                     if (canal[i].count_changelevel >= (uint16_t)(PORCENTAJE_UMBRAL_NUMCAMBIOS*(2*NUMPERIODOS)) )
-                     {
-                        canal[i].estado_hilo = HILO_ROTO;
-                     }
-                     else
-                     {
-                        canal[i].estado_hilo = HILO_OK;
-                     }
-                     
-                }
-                //
-                busc_estado_hilo.sm0 = 0;
-                //
+                busc_estado_hilo[i].counter_ticks = 0;
+                busc_estado_hilo[i].sm0++;
+
+                canal[i].count_changelevel = 0x00;
+
+                canal[i].pinchangelevel_enable();
+                //BitTo1(PCICR, PCIE2);//Activar interrupciones por cambio de nivel
             }
+            else
+            {
+                if (mainflag.sysTickMs)
+                {
+                    if ( ++busc_estado_hilo[i].counter_ticks >= (NUMPERIODOS*T_60HZ) )
+                    {
+                        //BitTo0(PCICR, PCIE2);
+                        canal[i].pinchangelevel_disable();
+
+                        if (canal[i].count_changelevel >= (uint16_t)(PORCENTAJE_UMBRAL_NUMCAMBIOS*(2*NUMPERIODOS)) )
+                        {
+                           canal[i].estado_hilo = HILO_ROTO;
+                        }
+                        else
+                        {
+                           canal[i].estado_hilo = HILO_OK;
+                        }
+                        //
+                        busc_estado_hilo[i].sm0 = 0;
+                        //
+                    }
+                }
+            }
+            
         }
-    }
+       
+    }//endfor
 }

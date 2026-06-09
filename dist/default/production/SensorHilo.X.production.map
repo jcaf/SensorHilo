@@ -12,10 +12,6 @@ Discarded input sections
  .text          0x00000000        0x0 build/default/production/main.o
  .data          0x00000000        0x0 build/default/production/main.o
  .bss           0x00000000        0x0 build/default/production/main.o
- .text.buscando_estado_hilo
-                0x00000000       0xaa build/default/production/main.o
- .bss.busc_estado_hilo
-                0x00000000        0x3 build/default/production/main.o
  .text          0x00000000        0x0 build/default/production/pinGetLevel/pinGetLevel.o
  .data          0x00000000        0x0 build/default/production/pinGetLevel/pinGetLevel.o
  .bss           0x00000000        0x0 build/default/production/pinGetLevel/pinGetLevel.o
@@ -193,7 +189,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x446
+.text           0x00000000      0x684
  *(.vectors)
  .vectors       0x00000000       0x68 /home/jcaf/.mchp_packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vectors
@@ -319,19 +315,31 @@ END GROUP
  .text.canal3_pinchangelevel_enable
                 0x000000fa        0xc build/default/production/main.o
                 0x000000fa                canal3_pinchangelevel_enable
- .text.main     0x00000106      0x2b0 build/default/production/main.o
-                0x00000106                main
+ .text.canal1_pinchangelevel_is_enable
+                0x00000106        0x8 build/default/production/main.o
+                0x00000106                canal1_pinchangelevel_is_enable
+ .text.canal2_pinchangelevel_is_enable
+                0x0000010e        0x8 build/default/production/main.o
+                0x0000010e                canal2_pinchangelevel_is_enable
+ .text.canal3_pinchangelevel_is_enable
+                0x00000116        0x8 build/default/production/main.o
+                0x00000116                canal3_pinchangelevel_is_enable
  .text.__vector_14
-                0x000003b6       0x18 build/default/production/main.o
-                0x000003b6                __vector_14
+                0x0000011e       0x18 build/default/production/main.o
+                0x0000011e                __vector_14
  .text.__vector_5
-                0x000003ce       0x74 build/default/production/main.o
-                0x000003ce                __vector_5
-                0x00000442                        . = ALIGN (0x2)
+                0x00000136       0x74 build/default/production/main.o
+                0x00000136                __vector_5
+ .text.buscando_estado_hilo
+                0x000001aa      0x174 build/default/production/main.o
+                0x000001aa                buscando_estado_hilo
+ .text.main     0x0000031e      0x362 build/default/production/main.o
+                0x0000031e                main
+                0x00000680                        . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000442        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
-                0x00000442                exit
-                0x00000442                _exit
+ .fini9         0x00000680        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+                0x00000680                exit
+                0x00000680                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -350,17 +358,17 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000442        0x4 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+ .fini0         0x00000680        0x4 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
  *(.fini0)
  *(.hightext)
  *(.hightext*)
  *(.progmemx.*)
-                0x00000446                        . = ALIGN (0x2)
+                0x00000684                        . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
-                0x00000446                        _etext = .
+                0x00000684                        _etext = .
 
-.data           0x00800100        0x0 load address 0x00000446
+.data           0x00800100        0x0 load address 0x00000684
                 [!provide]                        PROVIDE (__data_start = .)
  *(.data)
  *(.data*)
@@ -372,28 +380,31 @@ END GROUP
                 0x00800100                        _edata = .
                 [!provide]                        PROVIDE (__data_end = .)
 
-.bss            0x00800100       0x33
+.bss            0x00800100       0x42
                 0x00800100                        PROVIDE (__bss_start = .)
  *(.bss)
  *(.bss*)
- .bss.PD_last   0x00800100        0x1 build/default/production/main.o
-                0x00800100                PD_last
- .bss.canal     0x00800101       0x30 build/default/production/main.o
+ .bss.PD_last.0
+                0x00800100        0x1 build/default/production/main.o
+ .bss.canal     0x00800101       0x36 build/default/production/main.o
                 0x00800101                canal
- .bss.mainflag  0x00800131        0x1 build/default/production/main.o
-                0x00800131                mainflag
- .bss.isrflag   0x00800132        0x1 build/default/production/main.o
-                0x00800132                isrflag
+ .bss.busc_estado_hilo
+                0x00800137        0x9 build/default/production/main.o
+                0x00800137                busc_estado_hilo
+ .bss.mainflag  0x00800140        0x1 build/default/production/main.o
+                0x00800140                mainflag
+ .bss.isrflag   0x00800141        0x1 build/default/production/main.o
+                0x00800141                isrflag
  *(COMMON)
-                0x00800133                        PROVIDE (__bss_end = .)
-                0x00000446                        __data_load_start = LOADADDR (.data)
-                0x00000446                        __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800142                        PROVIDE (__bss_end = .)
+                0x00000684                        __data_load_start = LOADADDR (.data)
+                0x00000684                        __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800133        0x0
+.noinit         0x00800142        0x0
                 [!provide]                        PROVIDE (__noinit_start = .)
  *(.noinit .noinit.* .gnu.linkonce.n.*)
                 [!provide]                        PROVIDE (__noinit_end = .)
-                0x00800133                        _end = .
+                0x00800142                        _end = .
                 [!provide]                        PROVIDE (__heap_start = .)
                 0x00000000                        __flmap_init_label = DEFINED (__flmap_noinit_start)?__flmap_noinit_start:0x0
                 0x00000000                        __flmap = DEFINED (__flmap)?__flmap:0x0
