@@ -10,7 +10,7 @@
 
 #define PINGETLEVEL_PERIODIC_ACCESS 20//msE-3		//aplication-level
 
-#define PINGETLEVEL_SCAN_DEBOUNCE_MIN 40//ms 	//added 2020
+#define PINGETLEVEL_SCAN_DEBOUNCE_MIN 20//ms 	//added 2020
 //#include <math.h>
 //#define PINGETLEVEL_SCAN_KCOUNT_DEBOUNCE (int)( PINGETLEVEL_PERIODIC_ACCESS < PINGETLEVEL_SCAN_DEBOUNCE_MIN ? ceil((PINGETLEVEL_SCAN_DEBOUNCE_MIN*1.0f)/PINGETLEVEL_PERIODIC_ACCESS): 1)
 #define PINGETLEVEL_SCAN_KCOUNT_DEBOUNCE (int)( PINGETLEVEL_PERIODIC_ACCESS < PINGETLEVEL_SCAN_DEBOUNCE_MIN ? CEIL_INTEGERS(PINGETLEVEL_SCAN_DEBOUNCE_MIN, PINGETLEVEL_PERIODIC_ACCESS): 1)
@@ -39,6 +39,10 @@ static uint8_t pinGetLevel_4(void)
 {
 	return ReadPin(PORTRxGETLEVEL_4, PINxGETLEVEL_4);
 }
+static uint8_t pinGetLevel_5(void)
+{
+	return ReadPin(PORTRxGETLEVEL_5, PINxGETLEVEL_5);
+}
 
 
 void pinGetLevel_init(void)
@@ -46,9 +50,9 @@ void pinGetLevel_init(void)
 	PinTo1(PORTWxGETLEVEL_0, PINxGETLEVEL_0);//Pull-up
 	PinTo1(PORTWxGETLEVEL_1, PINxGETLEVEL_1);//Pull-up
         PinTo1(PORTWxGETLEVEL_2, PINxGETLEVEL_2);//Pull-up
-        PinTo1(PORTWxGETLEVEL_1, PINxGETLEVEL_3);//Pull-up
-        PinTo1(PORTWxGETLEVEL_2, PINxGETLEVEL_4);//Pull-up
-        
+        PinTo1(PORTWxGETLEVEL_3, PINxGETLEVEL_3);//Pull-up
+        //PinTo1(PORTWxGETLEVEL_4, PINxGETLEVEL_4);//Pull-up //TestINIT no necesita pull up
+        PinTo1(PORTWxGETLEVEL_5, PINxGETLEVEL_5);//Pull-up
         __delay_ms(1);
         
         ConfigInputPin(CONFIGIOxGETLEVEL_0, PINxGETLEVEL_0);
@@ -69,6 +73,9 @@ void pinGetLevel_init(void)
         
 	ConfigInputPin(CONFIGIOxGETLEVEL_4, PINxGETLEVEL_4);
 	pinGetLevel[4].readPinLevel = pinGetLevel_4;
+        
+        ConfigInputPin(CONFIGIOxGETLEVEL_5, PINxGETLEVEL_5);
+	pinGetLevel[5].readPinLevel = pinGetLevel_5;
         
 	__delay_ms(1);
 	//Set initial level

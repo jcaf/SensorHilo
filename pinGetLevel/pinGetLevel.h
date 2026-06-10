@@ -11,7 +11,7 @@
 #include "../main.h"
 
 
-#define PINGETLEVEL_NUMMAX 5 //# of pines to check
+#define PINGETLEVEL_NUMMAX 6 //# of pines to check
 
 struct _pinGetLevel
 {
@@ -32,7 +32,7 @@ struct _pinGetLevel
 extern struct _pinGetLevel pinGetLevel[PINGETLEVEL_NUMMAX];
 
 //
-//#define PINGETLEVEL_INITwCHANGED
+#define PINGETLEVEL_INITwCHANGED
 void pinGetLevel_init();//by default always changed-flag = 1 at begin
 //
 void pinGetLevel_job(void);
@@ -65,16 +65,17 @@ void pinGetLevel_job(void);
 #define CONFIGIOxGETLEVEL_3 CONFIGIOxSW_START
 #define PINxGETLEVEL_3		PINxSW_START
 
+#define PORTWxGETLEVEL_4 	PORTWxTEST_INIT
+#define PORTRxGETLEVEL_4 	PORTRxTEST_INIT
+#define CONFIGIOxGETLEVEL_4 CONFIGIOxTEST_INIT
+#define PINxGETLEVEL_4		PINxTEST_INIT
 
-#define PORTWxGETLEVEL_4 	PORTWx24VAC_PRESENTE
-#define PORTRxGETLEVEL_4 	PORTRx24VAC_PRESENTE
-#define CONFIGIOxGETLEVEL_4 CONFIGIOx24VAC_PRESENTE
-#define PINxGETLEVEL_4		PINx24VAC_PRESENTE
 
-//#define PORTWxGETLEVEL_2 	
-//#define PORTRxGETLEVEL_2 	
-//#define CONFIGIOxGETLEVEL_2 
-//#define PINxGETLEVEL_2		
+#define PORTWxGETLEVEL_5 	PORTWx24VAC_PRESENTE
+#define PORTRxGETLEVEL_5 	PORTRx24VAC_PRESENTE
+#define CONFIGIOxGETLEVEL_5 CONFIGIOx24VAC_PRESENTE
+#define PINxGETLEVEL_5		PINx24VAC_PRESENTE
+
 
 //pinGetLevel layout
 #define PGLEVEL_LYOUT_0 0
@@ -82,6 +83,7 @@ void pinGetLevel_job(void);
 #define PGLEVEL_LYOUT_2 2
 #define PGLEVEL_LYOUT_3 3
 #define PGLEVEL_LYOUT_4 4
+#define PGLEVEL_LYOUT_5 5
 
 
 #endif /* PINGETLEVEL_PINGETLEVEL_H_ */

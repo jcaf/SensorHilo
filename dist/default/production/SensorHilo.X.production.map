@@ -15,8 +15,6 @@ Discarded input sections
  .text          0x00000000        0x0 build/default/production/pinGetLevel/pinGetLevel.o
  .data          0x00000000        0x0 build/default/production/pinGetLevel/pinGetLevel.o
  .bss           0x00000000        0x0 build/default/production/pinGetLevel/pinGetLevel.o
- .text.pinGetLevel_job
-                0x00000000      0x146 build/default/production/pinGetLevel/pinGetLevel.o
  .text          0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
  .data          0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
  .bss           0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
@@ -178,7 +176,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x664
+.text           0x00000000      0x95e
  *(.vectors)
  .vectors       0x00000000       0x68 /home/jcaf/.mchp_packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vectors
@@ -313,35 +311,46 @@ END GROUP
  .text.canal3_pinchangelevel_is_enable
                 0x00000116        0x8 build/default/production/main.o
                 0x00000116                canal3_pinchangelevel_is_enable
+ .text.canal_stop
+                0x0000011e       0x2e build/default/production/main.o
+                0x0000011e                canal_stop
+ .text.canal_start
+                0x0000014c       0x3a build/default/production/main.o
+                0x0000014c                canal_start
  .text.__vector_14
-                0x0000011e       0x18 build/default/production/main.o
-                0x0000011e                __vector_14
+                0x00000186       0x18 build/default/production/main.o
+                0x00000186                __vector_14
  .text.__vector_5
-                0x00000136       0x96 build/default/production/main.o
-                0x00000136                __vector_5
+                0x0000019e       0x96 build/default/production/main.o
+                0x0000019e                __vector_5
  .text.buscando_estado_hilo
-                0x000001cc      0x14e build/default/production/main.o
-                0x000001cc                buscando_estado_hilo
- .text.main     0x0000031a      0x27e build/default/production/main.o
-                0x0000031a                main
+                0x00000234      0x152 build/default/production/main.o
+                0x00000234                buscando_estado_hilo
+ .text.main     0x00000386      0x3b4 build/default/production/main.o
+                0x00000386                main
  .text.pinGetLevel_0
-                0x00000598        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x0000073a        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_1
-                0x000005a0        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x00000742        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_2
-                0x000005a8        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x0000074a        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_3
-                0x000005b0        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x00000752        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_4
-                0x000005b8        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x0000075a        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+ .text.pinGetLevel_5
+                0x00000762        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_init
-                0x000005c0       0xa0 build/default/production/pinGetLevel/pinGetLevel.o
-                0x000005c0                pinGetLevel_init
-                0x00000660                        . = ALIGN (0x2)
+                0x0000076a       0xac build/default/production/pinGetLevel/pinGetLevel.o
+                0x0000076a                pinGetLevel_init
+ .text.pinGetLevel_job
+                0x00000816      0x144 build/default/production/pinGetLevel/pinGetLevel.o
+                0x00000816                pinGetLevel_job
+                0x0000095a                        . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000660        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
-                0x00000660                exit
-                0x00000660                _exit
+ .fini9         0x0000095a        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+                0x0000095a                exit
+                0x0000095a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -360,17 +369,17 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000660        0x4 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+ .fini0         0x0000095a        0x4 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
  *(.fini0)
  *(.hightext)
  *(.hightext*)
  *(.progmemx.*)
-                0x00000664                        . = ALIGN (0x2)
+                0x0000095e                        . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
-                0x00000664                        _etext = .
+                0x0000095e                        _etext = .
 
-.data           0x00800100        0x0 load address 0x00000664
+.data           0x00800100        0x0 load address 0x0000095e
                 [!provide]                        PROVIDE (__data_start = .)
  *(.data)
  *(.data*)
@@ -382,33 +391,33 @@ END GROUP
                 0x00800100                        _edata = .
                 [!provide]                        PROVIDE (__data_end = .)
 
-.bss            0x00800100       0x59
+.bss            0x00800100       0x63
                 0x00800100                        PROVIDE (__bss_start = .)
  *(.bss)
  *(.bss*)
- .bss.canal     0x00800100       0x39 build/default/production/main.o
+ .bss.canal     0x00800100       0x3f build/default/production/main.o
                 0x00800100                canal
  .bss.busc_estado_hilo
-                0x00800139        0x9 build/default/production/main.o
-                0x00800139                busc_estado_hilo
- .bss.PD_last   0x00800142        0x1 build/default/production/main.o
- .bss.mainflag  0x00800143        0x1 build/default/production/main.o
-                0x00800143                mainflag
- .bss.isrflag   0x00800144        0x1 build/default/production/main.o
-                0x00800144                isrflag
+                0x0080013f        0x9 build/default/production/main.o
+                0x0080013f                busc_estado_hilo
+ .bss.PD_last   0x00800148        0x1 build/default/production/main.o
+ .bss.mainflag  0x00800149        0x1 build/default/production/main.o
+                0x00800149                mainflag
+ .bss.isrflag   0x0080014a        0x1 build/default/production/main.o
+                0x0080014a                isrflag
  .bss.pinGetLevel
-                0x00800145       0x14 build/default/production/pinGetLevel/pinGetLevel.o
-                0x00800145                pinGetLevel
+                0x0080014b       0x18 build/default/production/pinGetLevel/pinGetLevel.o
+                0x0080014b                pinGetLevel
  *(COMMON)
-                0x00800159                        PROVIDE (__bss_end = .)
-                0x00000664                        __data_load_start = LOADADDR (.data)
-                0x00000664                        __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800163                        PROVIDE (__bss_end = .)
+                0x0000095e                        __data_load_start = LOADADDR (.data)
+                0x0000095e                        __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800159        0x0
+.noinit         0x00800163        0x0
                 [!provide]                        PROVIDE (__noinit_start = .)
  *(.noinit .noinit.* .gnu.linkonce.n.*)
                 [!provide]                        PROVIDE (__noinit_end = .)
-                0x00800159                        _end = .
+                0x00800163                        _end = .
                 [!provide]                        PROVIDE (__heap_start = .)
                 0x00000000                        __flmap_init_label = DEFINED (__flmap_noinit_start)?__flmap_noinit_start:0x0
                 0x00000000                        __flmap = DEFINED (__flmap)?__flmap:0x0

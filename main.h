@@ -147,8 +147,10 @@ struct _mainflag
 ///////////////////////////////////////////////////
 #define SW_START_PRESSED_LEVEL 0    //N.O
 #define SW_JOG_PRESSED_LEVEL 0      //N.O
-#define SW_STOP_PRESSED_LEVEL 1     //N.C
+#define SW_STOP_PRESSED_LEVEL 0//1     //N.C
 #define SW_ANULAR_ON_LEVEL 0        //SWITCH
+//
+#define SW_TEST_INIT_ON_LEVEL 1        //SWITCH
 ///////////////////////////////////////////////////
 
 #define NUM_CANALES_SENSOR 3
