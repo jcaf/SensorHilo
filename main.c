@@ -186,9 +186,14 @@ void canal_start(int i)
     busc_estado_hilo[i].sm0 = 0;//reset cuenta
 }
 //
+#define RELAY_TIMER_TIMING_ON_DELAY 5000    //ms
 int main(void)
 {
     int8_t count_ticks_pinGetLevel_job = 0;
+    
+    uint16_t count_ticks_relay_timer = 0;
+    int8_t timing_relay_timer=0;
+    
     
     __delay_ms(100);    //estabilizar la bornera de power al conectarlo 
     
@@ -289,7 +294,7 @@ int main(void)
     PD_last = PIND;
     BitTo1(PCICR, PCIE2);
     sei();
-    //while(1);
+    
     
     while (1)
     {
@@ -323,6 +328,7 @@ int main(void)
                     if (pinGetLevel_level(1) == SW_STOP_PRESSED_LEVEL)
                     {
                         PinTo0(PORTWxRELAY_START_STOP, PINxRELAY_START_STOP);
+                        PinTo0(PORTWxRELAY_TIMER, PINxRELAY_TIMER);
                     }
                 }
                 //PINxSW_JOG
@@ -333,6 +339,10 @@ int main(void)
                     {
                         PinTo1(PORTWxRELAY_JOG, PINxRELAY_JOG);
                     }
+                    else
+                    {
+                        PinTo0(PORTWxRELAY_JOG, PINxRELAY_JOG);
+                    }
                 }
                 //PINxSW_START
                 if (pinGetLevel_hasChanged(3))
@@ -341,10 +351,15 @@ int main(void)
                     if (pinGetLevel_level(3) == SW_START_PRESSED_LEVEL)
                     {
                         PinTo1(PORTWxRELAY_START_STOP, PINxRELAY_START_STOP);   
-                        //(PORTWxRELAY_TIMER, PINxRELAY_TIMER);
+                        //
+                        timing_relay_timer   = 1;//iniciar temporizado de relay timer
+                        count_ticks_relay_timer = 0;
+                        PinTo0(PORTWxRELAY_TIMER, PINxRELAY_TIMER);
+                        //
                     }
                 }
                 
+               
                 //PINxTEST_INIT
                 if (pinGetLevel_hasChanged(4))
                 {
@@ -389,9 +404,23 @@ int main(void)
                     }
                 }
                 
+                
+                //
+                if (timing_relay_timer)
+                {
+                    if (++count_ticks_relay_timer >= (250) )
+                    {
+                        timing_relay_timer = 0;
+                        count_ticks_relay_timer = 0;
+                        PinTo1(PORTWxRELAY_TIMER, PINxRELAY_TIMER);
+                    }
+                }
+                
+                
+                //
             }//count_ticks_pinGetLevel_job
                     
-        }//mainflag x pinGetLevel_hasChanged
+        }//mainflag 
 
         
         //----------------------
