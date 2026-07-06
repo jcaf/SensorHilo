@@ -27,7 +27,7 @@ struct _mainflag
 	unsigned sysTickMs :1;
 	unsigned __a:7;
 };
-
+extern struct _mainflag mainflag;
 
 #define PORTWxTEST1_CONTROL24VAC 	PORTB
 #define PORTRxTEST1_CONTROL24VAC 	PINB
@@ -147,7 +147,7 @@ struct _mainflag
 ///////////////////////////////////////////////////
 #define SW_START_PRESSED_LEVEL 0    //N.O
 #define SW_JOG_PRESSED_LEVEL 0      //N.O
-#define SW_STOP_PRESSED_LEVEL 0//1     //N.C
+#define SW_STOP_PRESSED_LEVEL 1//1     //N.C
 #define SW_ANULAR_ON_LEVEL 0        //SWITCH
 //
 #define SW_TEST_INIT_ON_LEVEL 1        //SWITCH

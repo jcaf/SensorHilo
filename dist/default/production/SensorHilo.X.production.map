@@ -1,52 +1,66 @@
 Archive member included to satisfy reference by file (symbol)
 
-/usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+/usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
                               /home/jcaf/.mchp_packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega328p/avr5/crtatmega328p.o (exit)
-/usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
-                              build/default/production/main.o (__do_clear_bss)
+/usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
+                              build/default/production/pinGetLevel/pinGetLevel.o (__do_clear_bss)
+
+Merging object attributes
+
 
 Discarded input sections
 
  .data          0x00000000        0x0 /home/jcaf/.mchp_packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .bss           0x00000000        0x0 /home/jcaf/.mchp_packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .text          0x00000000        0x0 build/default/production/main.o
- .data          0x00000000        0x0 build/default/production/main.o
- .bss           0x00000000        0x0 build/default/production/main.o
  .text          0x00000000        0x0 build/default/production/pinGetLevel/pinGetLevel.o
  .data          0x00000000        0x0 build/default/production/pinGetLevel/pinGetLevel.o
  .bss           0x00000000        0x0 build/default/production/pinGetLevel/pinGetLevel.o
- .text          0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
- .data          0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
- .bss           0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+ .text          0x00000000        0x0 build/default/production/main.o
+ .data          0x00000000        0x0 build/default/production/main.o
+ .bss           0x00000000        0x0 build/default/production/main.o
+ .bss.indicator1
+                0x00000000        0xa build/default/production/main.o
+ .text          0x00000000        0x0 build/default/production/indicator/indicator.o
+ .data          0x00000000        0x0 build/default/production/indicator/indicator.o
+ .bss           0x00000000        0x0 build/default/production/indicator/indicator.o
+ .text.indicatorTimed_run_only_once
+                0x00000000        0x8 build/default/production/indicator/indicator.o
+ .text.indicator_on
+                0x00000000       0x20 build/default/production/indicator/indicator.o
+ .text.indicator_off
+                0x00000000       0x26 build/default/production/indicator/indicator.o
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
- .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
- .text          0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
- .data          0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
- .bss           0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.mul
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.div
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
- .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.prologue
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.builtins
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.fmul
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
-                0x00000000        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
+                0x00000000        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
 
 Memory Configuration
 
@@ -64,16 +78,17 @@ Linker script and memory map
 
 Address of section .data set to 0x800100
 LOAD /home/jcaf/.mchp_packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega328p/avr5/crtatmega328p.o
-LOAD build/default/production/main.o
 LOAD build/default/production/pinGetLevel/pinGetLevel.o
+LOAD build/default/production/main.o
+LOAD build/default/production/indicator/indicator.o
                 0x00000001                        __MPLAB_BUILD = 0x1
 START GROUP
-LOAD /usr/lib/gcc/avr/15.1.0/../../../../avr/lib/avr5/libm.a
+LOAD /usr/lib/gcc/avr/16.1.0/../../../../avr/lib/avr5/libm.a
 END GROUP
 START GROUP
-LOAD /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a
-LOAD /usr/lib/gcc/avr/15.1.0/../../../../avr/lib/avr5/libm.a
-LOAD /usr/lib/gcc/avr/15.1.0/../../../../avr/lib/avr5/libc.a
+LOAD /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a
+LOAD /usr/lib/gcc/avr/16.1.0/../../../../avr/lib/avr5/libm.a
+LOAD /usr/lib/gcc/avr/16.1.0/../../../../avr/lib/avr5/libc.a
 LOAD /home/jcaf/.mchp_packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega328p/avr5/libatmega328p.a
 END GROUP
                 0x00000000                        __TEXT_REGION_ORIGIN__ = DEFINED (__TEXT_REGION_ORIGIN__)?__TEXT_REGION_ORIGIN__:0x0
@@ -176,22 +191,23 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x9d6
+.text           0x00000000      0xb76
  *(.vectors)
  .vectors       0x00000000       0x68 /home/jcaf/.mchp_packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vectors
                 0x00000000                __vector_default
  *(.vectors)
- *(.progmem.gcc*)
+                0x00000068                        __progmem_start = .
+ *(.progmem)
+ *(.progmem.*)
+                0x00000068                        __progmem_end = .
+                0x00000001                        ASSERT (((__progmem_start == __progmem_end) || (__progmem_end <= 0x10000)), .progmem section exceeds 0x10000)
                 0x00000068                        . = ALIGN (0x2)
                 0x00000068                        __trampolines_start = .
  *(.trampolines)
  .trampolines   0x00000068        0x0 linker stubs
  *(.trampolines*)
                 0x00000068                        __trampolines_end = .
- *libprintf_flt.a:*(.progmem.data)
- *libc.a:*(.progmem.data)
- *(.progmem.*)
                 0x00000068                        . = ALIGN (0x2)
  *(.lowtext)
  *(.lowtext*)
@@ -215,7 +231,7 @@ END GROUP
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000074       0x10 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_clear_bss.o)
+ .init4         0x00000074       0x10 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_clear_bss.o)
                 0x00000074                __do_clear_bss
  *(.init4)
  *(.init5)
@@ -257,100 +273,115 @@ END GROUP
                 0x0000008c                __vector_20
                 0x00000090                        . = ALIGN (0x2)
  *(.text.*)
- .text.canal1_shortckt_read
-                0x00000090        0x6 build/default/production/main.o
-                0x00000090                canal1_shortckt_read
- .text.canal2_shortckt_read
-                0x00000096        0x8 build/default/production/main.o
-                0x00000096                canal2_shortckt_read
- .text.canal3_shortckt_read
-                0x0000009e        0x8 build/default/production/main.o
-                0x0000009e                canal3_shortckt_read
- .text.canal1_relay24VAC_ON
-                0x000000a6        0x4 build/default/production/main.o
-                0x000000a6                canal1_relay24VAC_ON
- .text.canal2_relay24VAC_ON
-                0x000000aa        0x4 build/default/production/main.o
-                0x000000aa                canal2_relay24VAC_ON
- .text.canal3_relay24VAC_ON
-                0x000000ae        0x4 build/default/production/main.o
-                0x000000ae                canal3_relay24VAC_ON
- .text.canal1_relay24VAC_OFF
-                0x000000b2        0x4 build/default/production/main.o
-                0x000000b2                canal1_relay24VAC_OFF
- .text.canal2_relay24VAC_OFF
-                0x000000b6        0x4 build/default/production/main.o
-                0x000000b6                canal2_relay24VAC_OFF
- .text.canal3_relay24VAC_OFF
-                0x000000ba        0x4 build/default/production/main.o
-                0x000000ba                canal3_relay24VAC_OFF
- .text.canal1_pinchangelevel_disable
-                0x000000be        0xc build/default/production/main.o
-                0x000000be                canal1_pinchangelevel_disable
- .text.canal2_pinchangelevel_disable
-                0x000000ca        0xc build/default/production/main.o
-                0x000000ca                canal2_pinchangelevel_disable
- .text.canal3_pinchangelevel_disable
-                0x000000d6        0xc build/default/production/main.o
-                0x000000d6                canal3_pinchangelevel_disable
- .text.canal1_pinchangelevel_enable
-                0x000000e2        0xc build/default/production/main.o
-                0x000000e2                canal1_pinchangelevel_enable
- .text.canal2_pinchangelevel_enable
-                0x000000ee        0xc build/default/production/main.o
-                0x000000ee                canal2_pinchangelevel_enable
- .text.canal3_pinchangelevel_enable
-                0x000000fa        0xc build/default/production/main.o
-                0x000000fa                canal3_pinchangelevel_enable
- .text.canal1_pinchangelevel_is_enable
-                0x00000106        0x8 build/default/production/main.o
-                0x00000106                canal1_pinchangelevel_is_enable
- .text.canal2_pinchangelevel_is_enable
-                0x0000010e        0x8 build/default/production/main.o
-                0x0000010e                canal2_pinchangelevel_is_enable
- .text.canal3_pinchangelevel_is_enable
-                0x00000116        0x8 build/default/production/main.o
-                0x00000116                canal3_pinchangelevel_is_enable
- .text.canal_stop
-                0x0000011e       0x2e build/default/production/main.o
-                0x0000011e                canal_stop
- .text.canal_start
-                0x0000014c       0x3a build/default/production/main.o
-                0x0000014c                canal_start
- .text.__vector_14
-                0x00000186       0x18 build/default/production/main.o
-                0x00000186                __vector_14
- .text.__vector_5
-                0x0000019e       0x96 build/default/production/main.o
-                0x0000019e                __vector_5
- .text.buscando_estado_hilo
-                0x00000234      0x152 build/default/production/main.o
-                0x00000234                buscando_estado_hilo
- .text.main     0x00000386      0x42c build/default/production/main.o
-                0x00000386                main
  .text.pinGetLevel_0
-                0x000007b2        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x00000090        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_1
-                0x000007ba        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x00000098        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_2
-                0x000007c2        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x000000a0        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_3
-                0x000007ca        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x000000a8        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_4
-                0x000007d2        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x000000b0        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_5
-                0x000007da        0x8 build/default/production/pinGetLevel/pinGetLevel.o
+                0x000000b8        0x8 build/default/production/pinGetLevel/pinGetLevel.o
  .text.pinGetLevel_init
-                0x000007e2       0xac build/default/production/pinGetLevel/pinGetLevel.o
-                0x000007e2                pinGetLevel_init
+                0x000000c0       0xac build/default/production/pinGetLevel/pinGetLevel.o
+                0x000000c0                pinGetLevel_init
  .text.pinGetLevel_job
-                0x0000088e      0x144 build/default/production/pinGetLevel/pinGetLevel.o
-                0x0000088e                pinGetLevel_job
-                0x000009d2                        . = ALIGN (0x2)
+                0x0000016c      0x122 build/default/production/pinGetLevel/pinGetLevel.o
+                0x0000016c                pinGetLevel_job
+ .text.canal1_shortckt_read
+                0x0000028e        0x6 build/default/production/main.o
+                0x0000028e                canal1_shortckt_read
+ .text.canal2_shortckt_read
+                0x00000294        0x8 build/default/production/main.o
+                0x00000294                canal2_shortckt_read
+ .text.canal3_shortckt_read
+                0x0000029c        0x8 build/default/production/main.o
+                0x0000029c                canal3_shortckt_read
+ .text.canal1_relay24VAC_ON
+                0x000002a4        0x4 build/default/production/main.o
+                0x000002a4                canal1_relay24VAC_ON
+ .text.canal2_relay24VAC_ON
+                0x000002a8        0x4 build/default/production/main.o
+                0x000002a8                canal2_relay24VAC_ON
+ .text.canal3_relay24VAC_ON
+                0x000002ac        0x4 build/default/production/main.o
+                0x000002ac                canal3_relay24VAC_ON
+ .text.canal1_relay24VAC_OFF
+                0x000002b0        0x4 build/default/production/main.o
+                0x000002b0                canal1_relay24VAC_OFF
+ .text.canal2_relay24VAC_OFF
+                0x000002b4        0x4 build/default/production/main.o
+                0x000002b4                canal2_relay24VAC_OFF
+ .text.canal3_relay24VAC_OFF
+                0x000002b8        0x4 build/default/production/main.o
+                0x000002b8                canal3_relay24VAC_OFF
+ .text.canal1_pinchangelevel_disable
+                0x000002bc        0xc build/default/production/main.o
+                0x000002bc                canal1_pinchangelevel_disable
+ .text.canal2_pinchangelevel_disable
+                0x000002c8        0xc build/default/production/main.o
+                0x000002c8                canal2_pinchangelevel_disable
+ .text.canal3_pinchangelevel_disable
+                0x000002d4        0xc build/default/production/main.o
+                0x000002d4                canal3_pinchangelevel_disable
+ .text.canal1_pinchangelevel_enable
+                0x000002e0        0xc build/default/production/main.o
+                0x000002e0                canal1_pinchangelevel_enable
+ .text.canal2_pinchangelevel_enable
+                0x000002ec        0xc build/default/production/main.o
+                0x000002ec                canal2_pinchangelevel_enable
+ .text.canal3_pinchangelevel_enable
+                0x000002f8        0xc build/default/production/main.o
+                0x000002f8                canal3_pinchangelevel_enable
+ .text.canal1_pinchangelevel_is_enable
+                0x00000304        0x8 build/default/production/main.o
+                0x00000304                canal1_pinchangelevel_is_enable
+ .text.canal2_pinchangelevel_is_enable
+                0x0000030c        0x8 build/default/production/main.o
+                0x0000030c                canal2_pinchangelevel_is_enable
+ .text.canal3_pinchangelevel_is_enable
+                0x00000314        0x8 build/default/production/main.o
+                0x00000314                canal3_pinchangelevel_is_enable
+ .text.canal_stop
+                0x0000031c       0x2e build/default/production/main.o
+                0x0000031c                canal_stop
+ .text.canal_start
+                0x0000034a       0x38 build/default/production/main.o
+                0x0000034a                canal_start
+ .text.__vector_14
+                0x00000382       0x18 build/default/production/main.o
+                0x00000382                __vector_14
+ .text.__vector_5
+                0x0000039a       0x74 build/default/production/main.o
+                0x0000039a                __vector_5
+ .text.buscando_estado_hilo
+                0x0000040e      0x128 build/default/production/main.o
+                0x0000040e                buscando_estado_hilo
+ .text.main     0x00000536      0x548 build/default/production/main.o
+                0x00000536                main
+ .text.indicator_setPortPin
+                0x00000a7e        0xa build/default/production/indicator/indicator.o
+                0x00000a7e                indicator_setPortPin
+ .text.indicatorTimed_setKSysTickTime_ms
+                0x00000a88        0x8 build/default/production/indicator/indicator.o
+                0x00000a88                indicatorTimed_setKSysTickTime_ms
+ .text.indicatorTimed_stop
+                0x00000a90       0x22 build/default/production/indicator/indicator.o
+                0x00000a90                indicatorTimed_stop
+ .text.indicatorTimed_cycle_start
+                0x00000ab2        0x8 build/default/production/indicator/indicator.o
+                0x00000ab2                indicatorTimed_cycle_start
+ .text.indicatorTimed_job
+                0x00000aba       0xb8 build/default/production/indicator/indicator.o
+                0x00000aba                indicatorTimed_job
+                0x00000b72                        . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000009d2        0x0 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
-                0x000009d2                exit
-                0x000009d2                _exit
+ .fini9         0x00000b72        0x0 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
+                0x00000b72                exit
+                0x00000b72                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -369,17 +400,18 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000009d2        0x4 /usr/lib/gcc/avr/15.1.0/avr5/libgcc.a(_exit.o)
+ .fini0         0x00000b72        0x4 /usr/lib/gcc/avr/16.1.0/avr5/libgcc.a(_exit.o)
  *(.fini0)
  *(.hightext)
  *(.hightext*)
+ *(.progmemx)
  *(.progmemx.*)
-                0x000009d6                        . = ALIGN (0x2)
+                0x00000b76                        . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
-                0x000009d6                        _etext = .
+                0x00000b76                        _etext = .
 
-.data           0x00800100        0x0 load address 0x000009d6
+.data           0x00800100        0x0 load address 0x00000b76
                 [!provide]                        PROVIDE (__data_start = .)
  *(.data)
  *(.data*)
@@ -391,33 +423,36 @@ END GROUP
                 0x00800100                        _edata = .
                 [!provide]                        PROVIDE (__data_end = .)
 
-.bss            0x00800100       0x63
+.bss            0x00800100       0x6a
                 0x00800100                        PROVIDE (__bss_start = .)
  *(.bss)
  *(.bss*)
- .bss.canal     0x00800100       0x3f build/default/production/main.o
-                0x00800100                canal
- .bss.busc_estado_hilo
-                0x0080013f        0x9 build/default/production/main.o
-                0x0080013f                busc_estado_hilo
- .bss.PD_last   0x00800148        0x1 build/default/production/main.o
- .bss.mainflag  0x00800149        0x1 build/default/production/main.o
-                0x00800149                mainflag
- .bss.isrflag   0x0080014a        0x1 build/default/production/main.o
-                0x0080014a                isrflag
  .bss.pinGetLevel
-                0x0080014b       0x18 build/default/production/pinGetLevel/pinGetLevel.o
-                0x0080014b                pinGetLevel
+                0x00800100       0x18 build/default/production/pinGetLevel/pinGetLevel.o
+                0x00800100                pinGetLevel
+ .bss.indicator0
+                0x00800118        0xa build/default/production/main.o
+                0x00800118                indicator0
+ .bss.canal     0x00800122       0x3c build/default/production/main.o
+                0x00800122                canal
+ .bss.busc_estado_hilo
+                0x0080015e        0x9 build/default/production/main.o
+                0x0080015e                busc_estado_hilo
+ .bss.PD_last   0x00800167        0x1 build/default/production/main.o
+ .bss.mainflag  0x00800168        0x1 build/default/production/main.o
+                0x00800168                mainflag
+ .bss.isrflag   0x00800169        0x1 build/default/production/main.o
+                0x00800169                isrflag
  *(COMMON)
-                0x00800163                        PROVIDE (__bss_end = .)
-                0x000009d6                        __data_load_start = LOADADDR (.data)
-                0x000009d6                        __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0080016a                        PROVIDE (__bss_end = .)
+                0x00000b76                        __data_load_start = LOADADDR (.data)
+                0x00000b76                        __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800163        0x0
+.noinit         0x0080016a        0x0
                 [!provide]                        PROVIDE (__noinit_start = .)
  *(.noinit .noinit.* .gnu.linkonce.n.*)
                 [!provide]                        PROVIDE (__noinit_end = .)
-                0x00800163                        _end = .
+                0x0080016a                        _end = .
                 [!provide]                        PROVIDE (__heap_start = .)
                 0x00000000                        __flmap_init_label = DEFINED (__flmap_noinit_start)?__flmap_noinit_start:0x0
                 0x00000000                        __flmap = DEFINED (__flmap)?__flmap:0x0
@@ -458,9 +493,12 @@ END GROUP
 
 .comment        0x00000000       0x12
  *(.comment)
- .comment       0x00000000       0x12 build/default/production/main.o
+ .comment       0x00000000       0x12 build/default/production/pinGetLevel/pinGetLevel.o
                                  0x13 (size before relaxing)
- .comment       0x00000012       0x13 build/default/production/pinGetLevel/pinGetLevel.o
+ .comment       0x00000012        0x0 build/default/production/main.o
+                                 0x13 (size before relaxing)
+ .comment       0x00000012        0x0 build/default/production/indicator/indicator.o
+                                 0x13 (size before relaxing)
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40

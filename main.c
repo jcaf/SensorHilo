@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include "main.h"
 #include "pinGetLevel/pinGetLevel.h"
+#include "indicator/indicator.h"
 
 volatile struct _isrflag isrflag;
 struct _mainflag mainflag;
@@ -38,11 +39,11 @@ struct _canal
 {
     uint8_t test_is_enabled;
     
-    
     int8_t estado_hilo;
     int8_t nuevo_estado;
     
-    uint16_t count_changelevel;
+    //uint16_t count_changelevel;
+    uint8_t count_changelevel;
     PTRFX_retVOID pinchangelevel_enable;
     PTRFX_retVOID pinchangelevel_disable;
     PTRFX_retUINT8_T pinchangelevel_is_enable;
@@ -57,7 +58,8 @@ struct _canal
         struct _v24ac_bf
         {
            unsigned timming:1;
-           unsigned __a:7;
+           unsigned time_toggle:1;
+           unsigned __a:6;
         }bf;
     }v24ac;
     
@@ -187,6 +189,10 @@ void canal_start(int i)
 }
 //
 #define RELAY_TIMER_TIMING_ON_DELAY 5000    //ms
+
+
+struct _indicator indicator0;
+struct _indicator indicator1;
 int main(void)
 {
     int8_t count_ticks_pinGetLevel_job = 0;
@@ -194,8 +200,10 @@ int main(void)
     uint16_t count_ticks_relay_timer = 0;
     int8_t timing_relay_timer=0;
     
+    int8_t counter_hilo_ok = 0;
+    int8_t lock = 0;    
     
-    __delay_ms(100);    //estabilizar la bornera de power al conectarlo 
+    __delay_ms(250);    //estabilizar la bornera de power al conectarlo 
     
     PORTB = PORTC = PORTD = 0;
     
@@ -294,6 +302,29 @@ int main(void)
     PD_last = PIND;
     BitTo1(PCICR, PCIE2);
     sei();
+    
+    indicator_setPortPin(&indicator0 , &PORTWxTEST_LED_VERDE, PINxTEST_LED_VERDE);
+    indicatorTimed_setKSysTickTime_ms(&indicator0, 514/SYSTICK_MS);
+    
+
+    
+//    indicator_setPortPin(&indicator1 , &PORTWxTEST_LED_ROJO, PINxTEST_LED_ROJO);
+//    indicatorTimed_setKSysTickTime_ms(&indicator1, 1500/SYSTICK_MS);
+//    indicatorTimed_cycle_start(&indicator1);
+//
+//    while (1)
+//    {
+//        if (isrflag.sysTickMs)
+//        {
+//            isrflag.sysTickMs = 0;
+//            mainflag.sysTickMs = 1;
+//        }
+//        indicatorTimed_job(&indicator0);
+//        indicatorTimed_job(&indicator1);
+//        mainflag.sysTickMs = 0;
+//    }
+//        
+    
     
     
     while (1)
@@ -427,7 +458,7 @@ int main(void)
         buscando_estado_hilo();
         //----------------------
         
-        for (int8_t i=0; i<NUM_CANALES_SENSOR ; i++)
+        for (int8_t i=0; i<NUM_CANALES_SENSOR; i++)
         {
             if (canal[i].test_is_enabled)
             {
@@ -450,7 +481,7 @@ int main(void)
                 {
                     canal[i].nuevo_estado = 0;
                     //
-                    if (canal[i].estado_hilo == HILO_ROTO )
+                    if ( (canal[i].estado_hilo == HILO_ROTO ) && (canal[i].v24ac.bf.timming == 0) )
                     {
                         canal[i].v24ac.on();
 
@@ -465,41 +496,108 @@ int main(void)
                         canal[i].pinchangelevel_disable();//busqueda_hilo = off;      
 
                         //lanzar el temporizador      
-                        canal[i].v24ac.bf.timming = 1;
+                        canal[i].v24ac.bf.timming = 1;//indica que se detecto el hilo ROTO
                         canal[i].v24ac.count_time_encendido = 0;
+                        
+                        //added
+                        canal[i].v24ac.bf.time_toggle = 0;
+                        //PinTo1(PORTWxTEST_LED_VERDE, PINxTEST_LED_VERDE);       
 
+                    }
+                    else if ( (canal[i].estado_hilo == HILO_ROTO ) && (canal[i].v24ac.bf.timming == 1) )
+                    {
+                        //esta cayendo siempre en este mismo punto cuando esta temperizando el tiempo con el relay OFF y a la vez viendo que el sensor esta abierto
+                        canal[i].pinchangelevel_enable();
+                        
                     }
                     else if (canal[i].estado_hilo == HILO_OK )
                     {
                         canal[i].v24ac.off();
-                        PinTo0(PORTWxTEST_LED_VERDE, PINxTEST_LED_VERDE);
                         canal[i].pinchangelevel_enable();   
+
+                        //aqui hay tema, porque como los 3 canales comparten solo 1 led de error, entonces basta que haya 1 para que lo use, el resto
+                        //por mas que el hilo NO este roto, si un canal esta roto, entonces dejar que cumpla su ciclo de señalización
+                        //PinTo0(PORTWxTEST_LED_VERDE, PINxTEST_LED_VERDE);//este se pone a 0 por los otros
                     }
 
                 }
 
                 ////////////////////////////////////////////////////////////////////
-                if (canal[i].v24ac.bf.timming)
+                if (canal[i].v24ac.bf.timming == 1)
                 {
                     if (mainflag.sysTickMs)
                     {
-                        //if (++canal[i].v24ac.count_time_encendido >= (uint16_t)(NUMPERIODOS*T_60HZ) )         
-                        if (++canal[i].v24ac.count_time_encendido >= 250 )         
+                        if (canal[i].v24ac.bf.time_toggle == 0)
                         {
-                            canal[i].v24ac.count_time_encendido = 0;
-
-                            canal[i].v24ac.off();
-                            canal[i].v24ac.bf.timming = 0;
-
-                            canal[i].pinchangelevel_enable();   
+                            //if (++canal[i].v24ac.count_time_encendido >= (uint16_t)(NUMPERIODOS*T_60HZ) )         
+                            if (++canal[i].v24ac.count_time_encendido >= 514 )  //514-166 ms       
+                            {
+                                canal[i].v24ac.count_time_encendido = 0;
+                                canal[i].v24ac.off();
+                                //
+                                canal[i].v24ac.bf.time_toggle = 1;// para la siguiente
+                                canal[i].pinchangelevel_enable();   //busca
+                                //canal[i].v24ac.bf.timming = 0;
+                                
+                                //PinTo0(PORTWxTEST_LED_VERDE, PINxTEST_LED_VERDE);       
+                            }  
                         }
+                        else
+                        {
+                            if (++canal[i].v24ac.count_time_encendido >= 514 )  //514 ms       
+                            {
+                                canal[i].v24ac.count_time_encendido = 0;
+                                //
+                                canal[i].v24ac.bf.timming = 0;
+                                //regresar a encender el relay, y como sabemos, se desahilita por ese tiempo al enceder el relay de 24VAC
+                                canal[i].v24ac.bf.time_toggle = 0;
+                            }
+                            
+                            
+                        }
+                        
                     }
                 }
-            ////////////////////////////////////////////////////////////////////
+                
             }//endif
         }//endfor
        
-     
+        
+        ///////////////////////////////////////////////////
+        if (lock == 0)
+        {
+            for (int8_t i=0; i<NUM_CANALES_SENSOR; i++)
+            {
+                if (canal[i].estado_hilo == HILO_ROTO )
+                {
+                    indicatorTimed_cycle_start(&indicator0);
+                    lock = 1;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            counter_hilo_ok = 0;
+            for (int8_t i=0; i<NUM_CANALES_SENSOR; i++)
+            {
+                if (canal[i].estado_hilo == HILO_OK )
+                {
+                    counter_hilo_ok++;
+                }
+            }
+            if (counter_hilo_ok == NUM_CANALES_SENSOR)
+            {
+                indicatorTimed_stop(&indicator0);//Parar led indicador
+                //
+                lock = 0;
+            }
+        }
+        ///////////////////////////////////////////////////
+        indicatorTimed_job(&indicator0);
+        //indicatorTimed_job(&indicator1);
+       
+        //////////////////////////////////
         mainflag.sysTickMs = 0;
     
     }//endwhile
@@ -558,11 +656,8 @@ ISR(PCINT2_vect)
             
         }
     }
-    
-    PinToggle(PORTWxTEST_LED_VERDE, PINxTEST_LED_VERDE);       
-    
+    //PinToggle(PORTWxTEST_LED_VERDE, PINxTEST_LED_VERDE);       
     PD_last = PUERTOD;
-
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -584,12 +679,12 @@ void buscando_estado_hilo(void)
             {
                 if (mainflag.sysTickMs)
                 {
-                    if ( ++busc_estado_hilo[i].counter_ticks >= ((uint16_t)(NUMPERIODOS*T_60HZ)) )
+                    if ( ++busc_estado_hilo[i].counter_ticks >= 166) //((uint16_t)(NUMPERIODOS*T_60HZ)) )//166ms x 3 ciclos
                     {
                         canal[i].pinchangelevel_disable();
 
-                        if (canal[i].count_changelevel >= (uint16_t)(PORCENTAJE_UMBRAL_NUMCAMBIOS*(2*NUMPERIODOS)) )
-                        //if (canal[i].count_changelevel >= 14 )
+                        //if (canal[i].count_changelevel >= (uint16_t)(PORCENTAJE_UMBRAL_NUMCAMBIOS*(2*NUMPERIODOS)) )
+                        if (canal[i].count_changelevel >= 15 )
                         {
                            canal[i].estado_hilo = HILO_ROTO;
                         }

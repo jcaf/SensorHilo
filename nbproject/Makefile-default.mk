@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c pinGetLevel/pinGetLevel.c
+SOURCEFILES_QUOTED_IF_SPACED=pinGetLevel/pinGetLevel.c main.c indicator/indicator.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/pinGetLevel/pinGetLevel.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/pinGetLevel/pinGetLevel.o ${OBJECTDIR}/main.o ${OBJECTDIR}/indicator/indicator.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/indicator/indicator.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/pinGetLevel/pinGetLevel.o
+OBJECTFILES=${OBJECTDIR}/pinGetLevel/pinGetLevel.o ${OBJECTDIR}/main.o ${OBJECTDIR}/indicator/indicator.o
 
 # Source Files
-SOURCEFILES=main.c pinGetLevel/pinGetLevel.c
+SOURCEFILES=pinGetLevel/pinGetLevel.c main.c indicator/indicator.c
 
 # Pack Options 
 PACK_COMPILER_OPTIONS=-I "${DFP_DIR}/include"
@@ -104,30 +104,42 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/fdf440d30b860ddd212a161d513fb58062a6a873 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main.o.d 
-	@${RM} ${OBJECTDIR}/main.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/main.o.d" -MT "${OBJECTDIR}/main.o.d" -MT ${OBJECTDIR}/main.o  -o ${OBJECTDIR}/main.o main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
-	
 ${OBJECTDIR}/pinGetLevel/pinGetLevel.o: pinGetLevel/pinGetLevel.c  .generated_files/flags/default/89017aa2dbe80a29c68f3cf86995cbc82170fde1 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/pinGetLevel" 
 	@${RM} ${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d 
 	@${RM} ${OBJECTDIR}/pinGetLevel/pinGetLevel.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d" -MT "${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d" -MT ${OBJECTDIR}/pinGetLevel/pinGetLevel.o  -o ${OBJECTDIR}/pinGetLevel/pinGetLevel.o pinGetLevel/pinGetLevel.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/fdf440d30b860ddd212a161d513fb58062a6a873 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/main.o.d 
+	@${RM} ${OBJECTDIR}/main.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/main.o.d" -MT "${OBJECTDIR}/main.o.d" -MT ${OBJECTDIR}/main.o  -o ${OBJECTDIR}/main.o main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+	
+${OBJECTDIR}/indicator/indicator.o: indicator/indicator.c  .generated_files/flags/default/68f841d7a36ace1ff420b72c111dc9598b02f9e .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/indicator" 
+	@${RM} ${OBJECTDIR}/indicator/indicator.o.d 
+	@${RM} ${OBJECTDIR}/indicator/indicator.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/indicator/indicator.o.d" -MT "${OBJECTDIR}/indicator/indicator.o.d" -MT ${OBJECTDIR}/indicator/indicator.o  -o ${OBJECTDIR}/indicator/indicator.o indicator/indicator.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+	
 else
+${OBJECTDIR}/pinGetLevel/pinGetLevel.o: pinGetLevel/pinGetLevel.c  .generated_files/flags/default/101c98eb2f61e0a10ca07260319c73c9bc3f40ff .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/pinGetLevel" 
+	@${RM} ${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d 
+	@${RM} ${OBJECTDIR}/pinGetLevel/pinGetLevel.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d" -MT "${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d" -MT ${OBJECTDIR}/pinGetLevel/pinGetLevel.o  -o ${OBJECTDIR}/pinGetLevel/pinGetLevel.o pinGetLevel/pinGetLevel.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+	
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/f2f56e0059369e8bb67fb7e3a3b5e9535ae45b0b .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/main.o.d" -MT "${OBJECTDIR}/main.o.d" -MT ${OBJECTDIR}/main.o  -o ${OBJECTDIR}/main.o main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
-${OBJECTDIR}/pinGetLevel/pinGetLevel.o: pinGetLevel/pinGetLevel.c  .generated_files/flags/default/101c98eb2f61e0a10ca07260319c73c9bc3f40ff .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}/pinGetLevel" 
-	@${RM} ${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d 
-	@${RM} ${OBJECTDIR}/pinGetLevel/pinGetLevel.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d" -MT "${OBJECTDIR}/pinGetLevel/pinGetLevel.o.d" -MT ${OBJECTDIR}/pinGetLevel/pinGetLevel.o  -o ${OBJECTDIR}/pinGetLevel/pinGetLevel.o pinGetLevel/pinGetLevel.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+${OBJECTDIR}/indicator/indicator.o: indicator/indicator.c  .generated_files/flags/default/b6dbb6a1222c8edd1578458b6ec6bf9cbc5aa79d .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/indicator" 
+	@${RM} ${OBJECTDIR}/indicator/indicator.o.d 
+	@${RM} ${OBJECTDIR}/indicator/indicator.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/indicator/indicator.o.d" -MT "${OBJECTDIR}/indicator/indicator.o.d" -MT ${OBJECTDIR}/indicator/indicator.o  -o ${OBJECTDIR}/indicator/indicator.o indicator/indicator.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
 endif
 

@@ -1,8 +1,8 @@
 build/default/production/pinGetLevel/pinGetLevel.o.d \
  build/default/production/pinGetLevel/pinGetLevel.o: \
  pinGetLevel/pinGetLevel.c pinGetLevel/../system.h \
- /usr/lib/gcc/avr/15.1.0/include/stdint.h /usr/avr/include/stdint.h \
- /usr/avr/include/stdlib.h /usr/lib/gcc/avr/15.1.0/include/stddef.h \
+ /usr/lib/gcc/avr/16.1.0/include/stdint.h /usr/avr/include/stdint.h \
+ /usr/avr/include/stdlib.h /usr/lib/gcc/avr/16.1.0/include/stddef.h \
  /usr/avr/include/bits/attribs.h /usr/avr/include/string.h \
  /usr/avr/include/avr/io.h /usr/avr/include/avr/sfr_defs.h \
  /usr/avr/include/inttypes.h \
@@ -17,10 +17,10 @@ build/default/production/pinGetLevel/pinGetLevel.o.d \
  pinGetLevel/../types.h pinGetLevel/pinGetLevel.h pinGetLevel/../main.h \
  pinGetLevel/../types.h pinGetLevel/../system.h
 pinGetLevel/../system.h:
-/usr/lib/gcc/avr/15.1.0/include/stdint.h:
+/usr/lib/gcc/avr/16.1.0/include/stdint.h:
 /usr/avr/include/stdint.h:
 /usr/avr/include/stdlib.h:
-/usr/lib/gcc/avr/15.1.0/include/stddef.h:
+/usr/lib/gcc/avr/16.1.0/include/stddef.h:
 /usr/avr/include/bits/attribs.h:
 /usr/avr/include/string.h:
 /usr/avr/include/avr/io.h:
